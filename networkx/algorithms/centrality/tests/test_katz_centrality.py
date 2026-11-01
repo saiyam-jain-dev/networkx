@@ -118,6 +118,16 @@ class TestKatzCentralityNumpy:
         np = pytest.importorskip("numpy")
         pytest.importorskip("scipy")
 
+    def test_single_node(self):
+        G = nx.empty_graph(1)
+        assert nx.katz_centrality_numpy(G) == nx.katz_centrality(G)
+        assert nx.katz_centrality_numpy(G, beta={0: 2.0}) == nx.katz_centrality(
+            G, beta={0: 2.0}
+        )
+        assert nx.katz_centrality_numpy(G, normalized=False) == nx.katz_centrality(
+            G, normalized=False
+        )
+
     def test_K5(self):
         """Katz centrality: K5"""
         G = nx.complete_graph(5)
